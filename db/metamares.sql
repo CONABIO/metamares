@@ -69,7 +69,7 @@ CREATE TABLE `directorio` (
   `correo` varchar(255) DEFAULT NULL,
   `telefono` varchar(255) DEFAULT NULL,
   `institucion_id` int(11) DEFAULT NULL,
-  `usuario_id` int(11) NOT NULL,
+  `usuario_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_directorio_instituciones1_idx` (`institucion_id`),
   KEY `fk_directorio_usuarios1_idx` (`usuario_id`),
@@ -243,18 +243,21 @@ CREATE TABLE `proyectos` (
   `periodo_id` int(11) DEFAULT NULL,
   `region_id` int(11) DEFAULT NULL,
   `institucion_id` int(11) DEFAULT NULL,
-  `datos_id` int(11) NOT NULL,
+  `datos_id` int(11) DEFAULT NULL,
+  `usuario_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_proyectos_info_adicional_idx` (`info_adicional_id`),
   KEY `fk_proyectos_periodo1_idx` (`periodo_id`),
   KEY `fk_proyectos_ubicaciones1_idx` (`region_id`),
   KEY `fk_proyectos_instituciones1_idx` (`institucion_id`),
   KEY `fk_proyectos_datos1_idx` (`datos_id`),
+  KEY `fk_proyectos_usuarios1_idx` (`usuario_id`),
   CONSTRAINT `fk_proyectos_datos1` FOREIGN KEY (`datos_id`) REFERENCES `datos` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_proyectos_info_adicional` FOREIGN KEY (`info_adicional_id`) REFERENCES `info_adicional` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_proyectos_instituciones1` FOREIGN KEY (`institucion_id`) REFERENCES `instituciones` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_proyectos_periodo1` FOREIGN KEY (`periodo_id`) REFERENCES `periodos` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_proyectos_ubicaciones1` FOREIGN KEY (`region_id`) REFERENCES `regiones` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `fk_proyectos_ubicaciones1` FOREIGN KEY (`region_id`) REFERENCES `regiones` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_proyectos_usuarios1` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Pestaña de proyectos';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -439,4 +442,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-06-19 10:49:28
+-- Dump completed on 2018-06-21 13:45:16
